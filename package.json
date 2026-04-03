@@ -1,0 +1,32 @@
+{
+  "name": "mestionora",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-connection": "node --env-file=.env utils/test-connection.js",
+    "split": "node --env-file=.env utils/split.js",
+    "style": "node --env-file=.env harness.js --task style",
+    "lore": "node --env-file=.env harness.js --task lore",
+    "translate": "node --env-file=.env harness.js --task translate",
+    "edit": "node --env-file=.env harness.js --task editor",
+    "format": "npx oxfmt@latest --write .",
+    "format:check": "npx oxfmt@latest --check .",
+    "lint": "npx oxlint@latest .",
+    "lint:fix": "npx oxlint@latest --fix .",
+    "check": "npx oxlint@latest . && npx oxfmt@latest --check ."
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "epub2md": "^1.6.2",
+    "fs-extra": "^11.3.4"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0"
+  }
+}
