@@ -32,7 +32,7 @@ async function main() {
 
   if (!task || (!inputPath && !isAll)) {
     console.error(
-      "❌ Usage: node --env-file=.env harness.js --task <style|lore|translate|editor> [--input <path> | --all] [--model <name>]",
+      "❌ Usage: npm run <style|lore|translate|edit> -- [--input <chapter> | --all --input <folder>] [--model <name>]",
     )
     process.exit(1)
   }
@@ -76,7 +76,7 @@ async function main() {
   console.log(`🚀 Starting [${task.toUpperCase()}] using model: ${modelName}`)
 
   for (const relativePath of filesToProcess) {
-    // Note: For 'editor', we don't necessarily read 'content' from 'source'
+    // Note: For 'edit', we don't necessarily read 'content' from 'source'
     // in the same way, but the runner handles file loading internally.
 
     const sourcePath = path.join(process.env.CHAPTERS_PATH, relativePath)
@@ -99,7 +99,7 @@ async function main() {
         case "translate":
           await runTranslation(model, content, relativePath)
           break
-        case "editor":
+        case "edit":
           await runEditing(model, relativePath)
           break
         default:

@@ -64,10 +64,8 @@ async function splitBook() {
     await fs.remove(tempMd)
 
     console.log(`\n✅ Done! Chapters saved in: ${outputDir}`)
-    console.log(`👉 To translate Chapter 1, run:`)
-    console.log(
-      `   node --env-file=.env harness.js --task translate --input ${bookName}/chapter_001.md`,
-    )
+    console.log(`👉 To begin, start by scraping the lore:`)
+    console.log(`   npm run lore --input ${bookName}/chapter_001.md`)
   } catch (err) {
     console.error("❌ Error during conversion:", err.message)
   }

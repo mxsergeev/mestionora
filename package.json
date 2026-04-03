@@ -13,7 +13,7 @@
     "style": "node --env-file=.env harness.js --task style",
     "lore": "node --env-file=.env harness.js --task lore",
     "translate": "node --env-file=.env harness.js --task translate",
-    "edit": "node --env-file=.env harness.js --task editor",
+    "edit": "node --env-file=.env harness.js --task edit",
     "format": "npx oxfmt@latest --write .",
     "format:check": "npx oxfmt@latest --check .",
     "lint": "npx oxlint@latest .",
