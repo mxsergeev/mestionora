@@ -65,7 +65,7 @@ async function splitBook() {
 
     console.log(`\n✅ Done! Chapters saved in: ${outputDir}`)
     console.log(`👉 To begin, start by scraping the lore:`)
-    console.log(`   npm run lore --input ${bookName}/chapter_001.md`)
+    console.log(`   npm run lore -- --input ${bookName}/chapter_001.md`)
   } catch (err) {
     console.error("❌ Error during conversion:", err.message)
   }
