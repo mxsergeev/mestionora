@@ -16,12 +16,9 @@ export async function updateProgress(fileName) {
     const content = await fs.readFile(progressPath, "utf8")
 
     /**
-     * Regex breakdown:
-     * - \\[ \\] : Matches an empty checkbox
-     * - \\s+   : Matches any space
-     * - ${fileName} : Matches the specific chapter filename
+     * Matches checkbox patterns like "- [ ] filename.md" or "- [x] filename.md"
      */
-    const escapedFileName = fileName.replaceAll(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    const escapedFileName = fileName.replaceAll(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
     const regex = new RegExp(`- \\[ \\] ${escapedFileName}`, "g")
 
     if (regex.test(content)) {

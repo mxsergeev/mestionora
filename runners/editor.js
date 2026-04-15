@@ -15,10 +15,16 @@ export async function runEditing(model, relativePath) {
 
   // Check if draft exists
   if (!(await fs.pathExists(draftPath))) {
-    throw new Error(`Draft not found for ${relativePath}. Run translation first.`)
+    throw new Error(
+      `Draft not found for ${relativePath}. ` +
+        `Run 'npm run translate' task first to generate a translated draft.`,
+    )
   }
   if (!(await fs.pathExists(guidePath)) || !(await fs.pathExists(lorePath))) {
-    throw new Error("Missing style_guide.md or lore_bible.md. Run style and lore tasks first.")
+    throw new Error(
+      `Missing style guide or lore bible for ${relativePath}. ` +
+        `Run 'npm run style' and 'npm run lore' tasks first.`,
+    )
   }
   const guide = await fs.readFile(guidePath, "utf8")
   const lore = await fs.readFile(lorePath, "utf8")

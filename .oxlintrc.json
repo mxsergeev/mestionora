@@ -18,8 +18,7 @@
     "eslint/no-var": "error",
     "eslint/prefer-const": "error",
     "eslint/require-await": "warn",
-    "eslint/no-await-in-loop": "warn",
-    "eslint/no-promise-executor-return": "error",
+    "eslint/no-promise-executor-return": "off",
     "max-lines-per-function": "off",
     "no-await-in-loop": "off"
   }

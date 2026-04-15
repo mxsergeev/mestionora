@@ -13,7 +13,10 @@ export async function runTranslation(model, content, relativePath) {
 
   // Ensure we have our knowledge base before starting
   if (!(await fs.pathExists(guidePath)) || !(await fs.pathExists(lorePath))) {
-    throw new Error("Missing style_guide.md or lore_bible.md. Run style and lore tasks first.")
+    throw new Error(
+      `Missing style guide or lore bible for ${relativePath}. ` +
+        `Run 'npm run style' and 'npm run lore' tasks first.`,
+    )
   }
 
   const guide = await fs.readFile(guidePath, "utf8")

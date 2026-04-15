@@ -52,8 +52,9 @@ async function main() {
     process.exit(1)
   }
 
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
-  const model = genAI.getGenerativeModel({ model: modelName })
+  const model = new GoogleGenerativeAI(process.env.GEMINI_API_KEY).getGenerativeModel({
+    model: modelName,
+  })
 
   // Determine which files to process
   let filesToProcess = []
@@ -89,6 +90,12 @@ async function main() {
     const content = await fs.readFile(sourcePath, "utf8")
 
     try {
+      // Validate task is one of the allowed values
+      if (!["style", "lore", "translate", "edit"].includes(task)) {
+        console.error(`❌ Unknown task: ${task}. Allowed tasks: style, lore, translate, edit`)
+        continue
+      }
+
       switch (task) {
         case "style":
           await runStyleAnalysis(model, content, relativePath)
@@ -105,11 +112,16 @@ async function main() {
         default:
           console.error("❌ Unknown task:", task)
       }
-    } catch (error) {
-      console.error(`❌ Failed processing ${relativePath}:`, error.message)
+    } catch (readError) {
+      console.error(`❌ Failed to read file ${relativePath}:`, readError.message)
+      continue
+    }
+
+    // Add rate limiting between API calls to avoid hitting rate limits
+    if (filesToProcess.length > 1 && relativePath !== filesToProcess[0]) {
+      await new Promise((resolve) => setTimeout(resolve, 500))
     }
   }
-  console.log(`\n✅ All tasks completed.`)
 }
 
 await main()
